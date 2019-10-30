@@ -18,9 +18,9 @@
                 </form>
                 <div class="row mt-4 mb-3 mx-1">
                     <div class="col-md-9">
-                        <input type="text" class="p-1" [formControl]="repositoryFilterKeyword"
+                        <input type="text" class="p-1" [(ngModel)]="repositoryFilterKeyword"
                                placeholder="Enter some keywords to filter"
-                               (keyup)="filterRepository(repositoryFilterKeyword.value)">
+                               (keyup)="filterRepository(repositoryFilterKeyword)">
                     </div>
                     <span class="col-md-3">
                             <button type="button" class="p-1 btn btn-outline-secondary" (click)="clearFilteredValue()">Clear</button>
@@ -29,7 +29,7 @@
             </div>
             <div class="rounded border" id="filtered-list">
                 <p class="filter-list" *ngFor="let repositoryName of filteredData"
-                   [innerHTML]="repositoryName.name | highlight : repositoryFilterKeyword.value"></p>
+                   [innerHTML]="repositoryName.name | highlight : repositoryFilterKeyword"></p>
             </div>
         </div>
     </div>

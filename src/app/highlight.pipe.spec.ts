@@ -1,8 +1,16 @@
-import { HighlightPipe } from './highlight.pipe';
+import {HighlightPipe} from './highlight.pipe';
 
 describe('HighlightPipe', () => {
-  it('create an instance', () => {
-    const pipe = new HighlightPipe();
-    expect(pipe).toBeTruthy();
-  });
+
+    let pipe = new HighlightPipe();
+
+    it('return the same string if search string is null or empty', () => {
+        expect(pipe.transform('Byjus', null)).toBe('Byjus');
+    });
+
+
+    it('return the updated string with html mark tag containing search string', () => {
+        expect(pipe.transform('Byjus', 'ju')).toBe('By<mark>ju</mark>s');
+    });
+
 });

@@ -1,7 +1,6 @@
 import {Component} from '@angular/core';
-import {FormControl} from '@angular/forms';
 
-import {GithubRepository, AppService} from './app.service';
+import {AppService, GithubRepository} from './app.service';
 
 @Component({
     selector: 'app-root',
@@ -10,8 +9,8 @@ import {GithubRepository, AppService} from './app.service';
 })
 export class AppComponent {
     userName: string;
-    repositoryFilterKeyword = new FormControl('');
-    data: GithubRepository[];
+    repositoryFilterKeyword: string;
+    githubRepositoryData: GithubRepository[];
     filteredData: GithubRepository[];
 
     constructor(private appService: AppService) {
@@ -20,30 +19,30 @@ export class AppComponent {
 
     getUsersRepositoryList() {
         this.appService.getGithubRepositoryByUsername(this.userName).subscribe((data) => {
-            this.data = data.body;
+            this.githubRepositoryData = data.body;
             this.filteredData = data.body;
+        }, error => {
+            alert(error);
         });
     }
 
     filterRepository(keyword: string) {
         if (keyword === null || keyword === '') {
-            this.filteredData = this.data;
+            this.filteredData = this.githubRepositoryData;
         } else {
-            this.filteredData = this.data.filter((el: GithubRepository) => {
+            this.filteredData = this.githubRepositoryData.filter((el: GithubRepository) => {
                 return el.name.indexOf(keyword) > -1;
             });
         }
     }
 
     clearUserNameValue() {
-        this.userName = null;
-        this.repositoryFilterKeyword.setValue(null);
-        this.data = null;
-        this.filteredData = null;
+        this.userName = this.githubRepositoryData = this.filteredData = null;
+        this.repositoryFilterKeyword = null;
     }
 
     clearFilteredValue() {
-        this.repositoryFilterKeyword.setValue(null);
+        this.repositoryFilterKeyword = null;
         this.filterRepository(null);
     }
 }
