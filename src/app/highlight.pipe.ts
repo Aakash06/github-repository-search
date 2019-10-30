@@ -5,12 +5,11 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 export class HighlightPipe implements PipeTransform {
 
-    transform(value: any, args: any): any {
+    transform(value: string, args: string): any {
         if (!args) {
             return value;
         }
-        let re = new RegExp(args, 'gi');
-        return value.replace(re, "<mark>" + args + "</mark>");
+        return value.replace(new RegExp(args, 'gi'), '<mark>' + args + '</mark>');
     }
 
 }

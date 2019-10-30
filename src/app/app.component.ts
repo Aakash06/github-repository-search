@@ -1,6 +1,7 @@
 import {Component} from '@angular/core';
-import {FormControl} from "@angular/forms";
-import {GithubRepository, AppService} from "./app.service";
+import {FormControl} from '@angular/forms';
+
+import {GithubRepository, AppService} from './app.service';
 
 @Component({
     selector: 'app-root',
@@ -21,11 +22,11 @@ export class AppComponent {
         this.appService.getGithubRepositoryByUsername(this.userName).subscribe((data) => {
             this.data = data.body;
             this.filteredData = data.body;
-        })
+        });
     }
 
     filterRepository(keyword: string) {
-        if (keyword == null || keyword == '') {
+        if (keyword === null || keyword === '') {
             this.filteredData = this.data;
         } else {
             this.filteredData = this.data.filter((el: GithubRepository) => {
@@ -43,16 +44,6 @@ export class AppComponent {
 
     clearFilteredValue() {
         this.repositoryFilterKeyword.setValue(null);
-        this.filterRepository(null)
-    }
-
-    function (element, start, end) {
-        var str = element.innerHTML;
-        str = str.substr(0, start) +
-            '<span class="hilite">' +
-            str.substr(start, end - start + 1) +
-            '</span>' +
-            str.substr(end + 1);
-        element.innerHTML = str;
+        this.filterRepository(null);
     }
 }

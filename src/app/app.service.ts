@@ -1,9 +1,9 @@
 import {Injectable} from '@angular/core';
-import {HttpClient, HttpHeaders, HttpResponse} from "@angular/common/http";
-import {Observable} from "rxjs";
+import {HttpClient, HttpHeaders, HttpResponse} from '@angular/common/http';
+import {Observable} from 'rxjs';
 
 export class GithubRepository {
-    name: String;
+    name: string;
 }
 
 @Injectable({
@@ -21,7 +21,7 @@ export class AppService {
     constructor(private httpClient: HttpClient) {
     }
 
-    getGithubRepositoryByUsername(userName: String): Observable<HttpResponse<GithubRepository[]>> {
-        return this.httpClient.get<GithubRepository[]>(`https://api.github.com/users/${userName}/repos`, this.requestOptions)
+    getGithubRepositoryByUsername(userName: string): Observable<HttpResponse<GithubRepository[]>> {
+        return this.httpClient.get<GithubRepository[]>(`https://api.github.com/users/${userName}/repos`, this.requestOptions);
     }
 }
