@@ -5,7 +5,7 @@ import {Pipe, PipeTransform} from '@angular/core';
 })
 export class HighlightPipe implements PipeTransform {
 
-    transform(value: string, args: string): any {
+    transform(value: string, args: string): any { //Search globally for the keyword and add html mark tag
         if (!args) {
             return value;
         }

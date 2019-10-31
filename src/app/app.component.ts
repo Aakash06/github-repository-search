@@ -17,7 +17,7 @@ export class AppComponent {
 
     }
 
-    getUsersRepositoryList() {
+    getUsersRepositoryList() { // Hit on github server to collect repositories list
         this.appService.getGithubRepositoryByUsername(this.userName).subscribe((data) => {
             this.githubRepositoryData = data.body;
             this.filteredData = data.body;
@@ -26,7 +26,7 @@ export class AppComponent {
         });
     }
 
-    filterRepository(keyword: string) {
+    filterRepository(keyword: string) { // filter the repository list
         if (keyword === null || keyword === '') {
             this.filteredData = this.githubRepositoryData;
         } else {
@@ -36,12 +36,12 @@ export class AppComponent {
         }
     }
 
-    clearUserNameValue() {
+    clearUserNameValue() { // call when click on clear the username
         this.userName = this.githubRepositoryData = this.filteredData = null;
         this.repositoryFilterKeyword = null;
     }
 
-    clearFilteredValue() {
+    clearFilteredValue() { // call when clear filter keyword value
         this.repositoryFilterKeyword = null;
         this.filterRepository(null);
     }
